@@ -37,9 +37,10 @@ const sections = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: (string | false | null | undefined)[]): string {
+  return classes.filter(Boolean).join(' ');
 }
+
 
 export default function WithComparisonTableOnDark() {
   return (
@@ -89,7 +90,8 @@ export default function WithComparisonTableOnDark() {
                   <li key={section.name}>
                     <ul role="list" className="space-y-4">
                       {section.features.map((feature) => {
-                        const value = feature.tiers?.[tier.name]
+                        const value = feature.tiers?.[tier.name as 'Starter' | 'Growth' | 'Scale']
+
                         return value ? (
                           <li key={feature.name} className="flex gap-x-3">
                             <CheckIcon aria-hidden="true" className="h-6 w-5 flex-none text-indigo-400" />
@@ -189,7 +191,7 @@ export default function WithComparisonTableOnDark() {
                           <div className="absolute inset-x-8 mt-4 h-px bg-white/5" />
                         </th>
                         {tiers.map((tier) => {
-                          const value = feature.tiers?.[tier.name]
+                          const value = feature.tiers?.[tier.name as 'Starter' | 'Growth' | 'Scale']
                           return (
                             <td key={tier.id} className="px-6 py-4 xl:px-8">
                               {typeof value === 'string' ? (

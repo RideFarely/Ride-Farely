@@ -225,21 +225,25 @@ export default function ThreeTiersWithLogosAndFeatureComparison() {
                   </th>
                   {tiers.map((tier) => (
                     <td key={tier.name} className="p-4 max-sm:text-center">
-                      {typeof feature.tiers[tier.name] === 'string' ? (
+                      {typeof feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === 'string' ? (
                         <>
                           <span className="sr-only">{tier.name} includes:</span>
-                          <span className="text-sm/6 text-gray-950">{feature.tiers[tier.name]}</span>
+                          <span className="text-sm/6 text-gray-950">{feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+}</span>
                         </>
                       ) : (
                         <>
-                          {feature.tiers[tier.name] === true ? (
+                          {feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === true ? (
                             <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
                           ) : (
                             <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
                           )}
 
                           <span className="sr-only">
-                            {feature.tiers[tier.name] === true
+                            {feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === true
                               ? `Included in ${tier.name}`
                               : `Not included in ${tier.name}`}
                           </span>
@@ -285,17 +289,21 @@ export default function ThreeTiersWithLogosAndFeatureComparison() {
                         >
                           <dt className="text-sm/6 font-normal text-gray-600">{feature.name}</dt>
                           <dd className="text-center">
-                            {typeof feature.tiers[tier.name] === 'string' ? (
-                              <span className="text-sm/6 text-gray-950">{feature.tiers[tier.name]}</span>
+                            {typeof feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === 'string' ? (
+                              <span className="text-sm/6 text-gray-950">{feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+}</span>
                             ) : (
                               <>
-                                {feature.tiers[tier.name] === true ? (
+                                {feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === true ? (
                                   <CheckIcon aria-hidden="true" className="inline-block size-4 fill-green-600" />
                                 ) : (
                                   <MinusIcon aria-hidden="true" className="inline-block size-4 fill-gray-400" />
                                 )}
 
-                                <span className="sr-only">{feature.tiers[tier.name] === true ? 'Yes' : 'No'}</span>
+                                <span className="sr-only">{feature.tiers[tier.name as 'Starter' | 'Growth' | 'Scale']
+ === true ? 'Yes' : 'No'}</span>
                               </>
                             )}
                           </dd>

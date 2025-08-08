@@ -1,7 +1,8 @@
 "use client";
+
 import { cn } from "@/src/lib/utils";
-import { AnimationProps, motion } from "motion/react";
-import React from "react";
+import { motion } from "framer-motion";
+import React, { ReactNode } from "react";
 
 export function TextAnimationBlurFadeInDemo() {
   return (
@@ -45,37 +46,28 @@ const Text = ({
   delay = 0,
   ...animationProps
 }: {
-  children: string;
+  children: ReactNode;
   className?: string;
   delay?: number;
-} & AnimationProps) => {
+  [key: string]: any;
+}) => {
+  const isString = typeof children === "string";
+
   return (
-    <motion.p
-      {...animationProps}
-      className={cn("text-4xl font-medium", className)}
-    >
-      {children.split(" ").map((word, index) => (
-        <motion.span
-          key={`word-${index}-${word}`}
-          initial={{
-            opacity: 0,
-            filter: "blur(10px)",
-            y: 10,
-          }}
-          whileInView={{
-            opacity: 1,
-            filter: "blur(0px)",
-            y: 0,
-          }}
-          transition={{
-            duration: 0.2,
-            delay: delay + index * 0.02,
-          }}
-          className="inline-block"
-        >
-          {word}&nbsp;
-        </motion.span>
-      ))}
+    <motion.p {...animationProps} className={cn("text-4xl font-medium", className)}>
+      {isString
+        ? (children as string).split(" ").map((word, index) => (
+            <motion.span
+              key={`word-${index}-${word}`}
+              initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
+              whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              transition={{ duration: 0.2, delay: delay + index * 0.02 }}
+              className="inline-block"
+            >
+              {word}&nbsp;
+            </motion.span>
+          ))
+        : children}
     </motion.p>
   );
 };

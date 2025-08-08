@@ -1,7 +1,8 @@
 "use client";
+
 import { cn } from "@/src/lib/utils";
-import { AnimationProps, motion } from "motion/react";
-import React from "react";
+import { motion } from "framer-motion";
+import React, { ReactNode } from "react";
 
 export function TextAnimationBlurFadeInDemo() {
   return (
@@ -48,7 +49,8 @@ const Text = ({
   children: string;
   className?: string;
   delay?: number;
-} & AnimationProps) => {
+  [key: string]: any; // Accept any additional props (like motion props)
+}) => {
   return (
     <motion.p
       {...animationProps}
